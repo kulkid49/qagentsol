@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QGPT & QAgent - AI Employees for the Enterprise</title>
+    <meta name="description" content="Enterprise AI Agents powered by QGPT - Automate finance operations, document digitalization, and knowledge access with secure, production-ready GenAI.">
+    
+    <style>
+        /* ========================================
+           CSS VARIABLES & RESET
+           ======================================== */
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-dark: #1d4ed8;
+            --color-primary-light: #3b82f6;
+            --color-gray-900: #1f2937;
+            --color-gray-800: #374151;
+            --color-gray-700: #4b5563;
+            --color-gray-600: #6b7280;
+            --color-gray-500: #9ca3af;
+            --color-gray-400: #d1d5db;
+            --color-gray-300: #e5e7eb;
+            --color-gray-200: #f3f4f6;
+            --color-gray-100: #f9fafb;
+            --color-white: #ffffff;
+            --color-black: #000000;
+            
+            --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 350ms ease;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-gray-800);
+            background-color: var(--color-white);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-gray-900);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .text-large {
+            font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+            line-height: 1.7;
+        }
+
+        .text-small {
+            font-size: 0.875rem;
+        }
+
+        /* ========================================
+           LAYOUT UTILITIES
+           ======================================== */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
+        }
+
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .section-padding {
+                padding-top: 7.5rem;
+                padding-bottom: 7.5rem;
+            }
+        }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-white {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-white:hover {
+            background-color: var(--color-gray-100);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline-white {
+            background-color: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+
+        .btn-outline-white:hover {
+            background-color: var(--color-white);
+            color: var(--color-primary);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .btn-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ========================================
+           HEADER & NAVIGATION
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4rem;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo span {
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-gray-700);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-cta {
+            display: none;
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+        }
+
+        .mobile-menu-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-gray-800);
+            transition: all var(--transition-base);
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--color-gray-200);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.875rem 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-gray-700);
+            border-bottom: 1px solid var(--color-gray-100);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        @media (min-width: 768px) {
+            .nav {
+                height: 4.5rem;
+            }
+
+            .nav-links {
+                display: flex;
+            }
+
+            .nav-cta {
+                display: inline-flex;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding-top: 6rem;
+            padding-bottom: 5rem;
+            background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-white) 50%, var(--color-gray-50) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse at top right, rgba(37, 99, 235, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--color-gray-900) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 500;
+            color: var(--color-gray-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .hero-body {
+            font-size: 1.0625rem;
+            color: var(--color-gray-600);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+        }
+
+        .hero-body p {
+            margin-bottom: 1rem;
+        }
+
+        /* ========================================
+           SECTION STYLES
+           ======================================== */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            margin-bottom: 1.25rem;
+            color: var(--color-gray-900);
+        }
+
+        .section-intro {
+            font-size: 1.0625rem;
+            color: var(--color-gray-600);
+            max-width: 800px;
+        }
+
+        /* ========================================
+           LISTS
+           ======================================== */
+        .feature-list {
+            margin: 2rem 0;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--color-gray-700);
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        .numbered-list {
+            counter-reset: step-counter;
+            margin: 2rem 0;
+        }
+
+        .numbered-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--color-gray-700);
+            line-height: 1.6;
+        }
+
+        .numbered-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .impact-text {
+            background-color: var(--color-gray-50);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .impact-text p {
+            margin-bottom: 0;
+            color: var(--color-gray-700);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           ALTERNATING SECTIONS
+           ======================================== */
+        .section-alt {
+            background-color: var(--color-gray-50);
+        }
+
+        .section-white {
+            background-color: var(--color-white);
+        }
+
+        /* ========================================
+           CTA LINK
+           ======================================== */
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .cta-link:hover {
+            color: var(--color-primary-dark);
+            gap: 0.75rem;
+        }
+
+        .cta-link::after {
+            content: '→';
+            transition: transform var(--transition-fast);
+        }
+
+        /* ========================================
+           WHY CHOOSE US SECTION
+           ======================================== */
+        .benefits-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .benefits-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .benefit-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition-base);
+        }
+
+        .benefit-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .benefit-card p {
+            margin-bottom: 0;
+            color: var(--color-gray-700);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           FINAL CTA SECTION
+           ======================================== */
+        .final-cta {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: var(--color-white);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            color: var(--color-white);
+            margin-bottom: 1.25rem;
+        }
+
+        .final-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2.5rem;
+            font-size: 1.0625rem;
+        }
+
+        .final-cta .btn-group {
+            justify-content: center;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background-color: var(--color-gray-900);
+            color: var(--color-gray-400);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-white);
+        }
+
+        /* ========================================
+           SECURITY SECTION SPECIAL STYLING
+           ======================================== */
+        .security-section p {
+            font-size: 1.0625rem;
+            color: var(--color-gray-700);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========================================
+           UTILITY CLASSES
+           ======================================== */
+        .text-center {
+            text-align: center;
+        }
+
+        .max-width-lg {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         HEADER & NAVIGATION
+         ======================================== -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="nav-logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="#2563eb"/>
+                    <path d="M8 12h6v2h-4v2h3v2h-3v4H8V12zm8 0h2v8h4v2h-6V12z" fill="white"/>
+                </svg>
+                QGPT & QAgent
+            </a>
+            
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#qgpt">QGPT</a>
+                <a href="#solutions">Solutions</a>
+                <a href="#security">Security</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <a href="#contact" class="btn btn-primary nav-cta">Get Started</a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home">Home</a>
+            <a href="#qgpt">QGPT</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#security">Security</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- ========================================
+         HERO SECTION
+         ======================================== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Hero background illustration placeholder -->
+                <!-- <div class="hero-illustration"></div> -->
+                
+                <h1>AI Employees for the Enterprise | QGPT & QAgent</h1>
+                <p class="hero-subtitle">Intelligent AI Agents Powered by Enterprise-Grade LLM Technology – Fast-Track Your Finance Operations, Document Digitalization, and Knowledge Access</p>
+                
+                <div class="hero-body">
+                    <p>In today's enterprise environment, manual processes in finance, document handling, and knowledge retrieval drain productivity, increase error rates, and expose organizations to compliance risks. QGPT, our production-ready Enterprise LLM platform, combined with the specialized QAgent suite, delivers autonomous AI Employees that work at the speed of thought.</p>
+                    <p>Built for security-conscious organizations, these solutions transform scattered enterprise data into actionable intelligence and automate complex workflows end-to-end. Whether it is extracting data from scanned or handwritten documents in multiple languages, posting PO-based invoices with zero-touch accuracy, accelerating receivables, or eliminating reconciliation discrepancies, QGPT & QAgent deliver measurable ROI through speed, precision, and complete auditability.</p>
+                </div>
+                
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary">Request a Personalized Demo</a>
+                    <a href="#" class="btn btn-outline">Calculate Your TCO Savings</a>
+                    <a href="#" class="btn btn-outline">Watch 2-Minute Overview</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 1: QGPT PLATFORM
+         ======================================== -->
+    <section class="section-white section-padding" id="qgpt">
+        <div class="container">
+            <div class="section-header">
+                <h2>QGPT: Production-Ready GenAI for Secure, Context-Aware Conversation-Based Solutions</h2>
+            </div>
+            
+            <p class="section-intro">QGPT is not just another chatbot or public LLM wrapper. It is a complete enterprise-grade Generative AI platform designed from the ground up for organizations that demand accuracy, security, and deep business context. By connecting 100+ enterprise data sources in real time while respecting your exact access controls, QGPT turns tribal knowledge, policies, reports, and documents into instant, cited answers across departments.</p>
+            
+            <ul class="feature-list">
+                <li><strong>Unified Knowledge Search</strong> with plug-and-play connectors (SharePoint, Confluence, Google Drive, Slack, Jira, ERP systems, and more) and real-time synchronization.</li>
+                <li><strong>Advanced Agentic RAG pipeline</strong> featuring hybrid search, contextual retrieval, knowledge graphs, source citations, deep research, and code interpretation.</li>
+                <li><strong>Flexible multi-LLM orchestration</strong> – deploy GPT-4, Claude, Gemini, Llama, Mistral, or any combination with fine-tuning and prompt optimization.</li>
+                <li><strong>Enterprise-Grade Security & Compliance</strong> – SOC 2 Type II ready, GDPR compliant, granular RBAC mirroring your org chart, SSO/SAML, full audit logs, data sovereignty (your data never leaves your infrastructure or trains external models), and optional on-prem/air-gap deployment.</li>
+            </ul>
+            
+            <div class="impact-text">
+                <p><strong>Business Impact:</strong> Knowledge workers spend up to 20% of their time searching for information. QGPT reduces this by 80% while delivering 30× ROI on knowledge management. Sales teams instantly retrieve proposals and competitive intelligence; finance queries budgets and policies in natural language; HR answers policy questions 24/7; engineering surfaces tribal knowledge and code snippets. Every response includes traceable sources, eliminating hallucination risks.</p>
+            </div>
+            
+            <p class="section-intro mt-2">QGPT serves as the cognitive core for all QAgent solutions, enabling conversational oversight, exception handling, and continuous learning across finance automation and document workflows.</p>
+            
+            <div class="mt-2">
+                <a href="#" class="cta-link">Explore QGPT Platform</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 2: QAGENT OCR
+         ======================================== -->
+    <section class="section-alt section-padding" id="solutions">
+        <div class="container">
+            <div class="section-header">
+                <h2>QAgent OCR: Precision Digitalization of Scanned and Handwritten Documents Across Languages</h2>
+            </div>
+            
+            <p class="section-intro">Manual transcription of invoices, contracts, forms, and handwritten notes is slow, error-prone, and costly – especially when documents contain printed text, handwriting, multiple languages, or mixed scripts. QAgent OCR eliminates this bottleneck by delivering enterprise-grade optical character recognition and intelligent data extraction that works at scale with near-human accuracy. Powered by QGPT's contextual understanding, it not only reads text but also structures it into usable data fields ready for downstream automation or ERP posting.</p>
+            
+            <ul class="feature-list">
+                <li><strong>High-accuracy OCR</strong> for both electronic scanned PDFs and complex handwritten documents.</li>
+                <li><strong>Native multi-language and mixed-language support</strong> (including English, regional Indian languages, and global scripts) with automatic language detection.</li>
+                <li><strong>Intelligent layout analysis and table extraction</strong> for invoices, purchase orders, forms, and multi-column documents.</li>
+                <li><strong>Automated validation</strong> against enterprise rules, duplicate detection, and anomaly flagging.</li>
+                <li><strong>Seamless export</strong> to searchable PDFs, structured JSON/XML, or direct ingestion into ERP, accounting, or workflow systems.</li>
+                <li><strong>Conversational query interface</strong> – ask QGPT-powered questions such as "Show me all invoices from Vendor X in March with amounts above ₹50,000" and receive instant results.</li>
+            </ul>
+            
+            <div class="impact-text">
+                <p><strong>Business Impact:</strong> Reduce document processing time from days to minutes, cut manual entry errors by up to 95%, and enable straight-through processing for 90%+ of incoming documents. Finance, procurement, and compliance teams gain real-time visibility while maintaining full audit trails and compliance with data residency requirements.</p>
+            </div>
+            
+            <h3 style="margin: 2rem 0 1rem; font-size: 1.25rem; color: var(--color-gray-900);">How It Works (3 Simple Steps):</h3>
+            <ol class="numbered-list">
+                <li>Upload or auto-ingest scanned/handwritten files via email, portal, or API.</li>
+                <li>QAgent OCR extracts, structures, and validates data using QGPT context.</li>
+                <li>Data flows directly into your ERP or triggers QAgent Fin Ops workflows with full traceability.</li>
+            </ol>
+            
+            <div class="mt-2">
+                <a href="#" class="btn btn-primary">See OCR in Action – Upload a Sample Document</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 3: ACCOUNTS PAYABLE AUTOMATION
+         ======================================== -->
+    <section class="section-white section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>QAgent AP: Zero-Touch PO-Based Invoice Posting and 3-Way Matching Automation</h2>
+            </div>
+            
+            <p class="section-intro">Accounts Payable teams struggle with high volumes of invoices, manual PO matching, approval bottlenecks, duplicate payments, and policy violations. QAgent AP transforms this into a fully autonomous process that ingests invoices, performs intelligent matching, validates compliance, routes exceptions conversationally, and posts directly to your ERP – all while maintaining complete audit readiness.</p>
+            
+            <ul class="feature-list">
+                <li><strong>Automatic ingestion and categorization</strong> of invoices from email, portals, or scanners (powered by QAgent OCR).</li>
+                <li><strong>Intelligent PO-based 2-way or 3-way matching</strong> with line-item level accuracy.</li>
+                <li><strong>Real-time validation</strong> against vendor master, pricing contracts, policies, and budget thresholds.</li>
+                <li><strong>Automated flagging</strong> of duplicates, anomalies, fraud indicators, and off-policy items.</li>
+                <li><strong>Dynamic approval routing</strong> with escalation and conversational exception handling via QGPT.</li>
+                <li><strong>Direct ERP posting</strong> (SAP, Oracle, QuickBooks, Tally, or any custom system) and payment scheduling based on cash position.</li>
+            </ul>
+            
+            <div class="impact-text">
+                <p><strong>Business Impact:</strong> Achieve 95% straight-through processing, reduce cycle time from weeks to hours, eliminate duplicate payments, and free AP teams for strategic work. Full compliance and audit logs ensure zero surprises during internal or statutory audits.</p>
+            </div>
+            
+            <div class="mt-2">
+                <a href="#contact" class="btn btn-primary">Request AP Automation Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 4: ACCOUNTS RECEIVABLE AUTOMATION
+         ======================================== -->
+    <section class="section-alt section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>QAgent AR: End-to-End Accounts Receivable Acceleration and Cash Flow Intelligence</h2>
+            </div>
+            
+            <p class="section-intro">Delayed invoicing, manual follow-ups, and reconciliation gaps directly impact cash flow and working capital. QAgent AR automates the entire revenue cycle – from invoice generation to payment reconciliation – while proactively identifying at-risk customers and reducing days sales outstanding (DSO).</p>
+            
+            <ul class="feature-list">
+                <li><strong>Auto-generation and branded delivery</strong> of invoices with accurate line-item details.</li>
+                <li><strong>Real-time payment reconciliation</strong> across bank feeds, payment gateways, and customer portals.</li>
+                <li><strong>Intelligent dunning engine</strong> with automated reminders, escalation sequences, and personalized communication.</li>
+                <li><strong>Risk scoring of customers</strong> based on payment history, credit data, and behavioral signals.</li>
+                <li><strong>Direct sync of status</strong> to ERP and CRM systems with full audit trail.</li>
+                <li><strong>Conversational oversight</strong> – finance teams can ask "What is the status of Invoice #INV-2025-034?" and receive instant updates.</li>
+            </ul>
+            
+            <div class="impact-text">
+                <p><strong>Business Impact:</strong> Reduce DSO by 15–30 days, minimize bad debts, and accelerate cash collection without increasing headcount.</p>
+            </div>
+            
+            <div class="mt-2">
+                <a href="#contact" class="btn btn-primary">Accelerate Your Receivables Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 5: RECONCILIATION AUTOMATION
+         ======================================== -->
+    <section class="section-white section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>QAgent Reconciliation: Autonomous Bank, Ledger, and Intercompany Matching</h2>
+            </div>
+            
+            <p class="section-intro">Month-end reconciliations are manual, time-consuming, and error-prone. QAgent Reconciliation continuously monitors transactions, matches records across systems, flags exceptions with root-cause analysis, and prepares audit-ready reports – running 24/7 without human intervention.</p>
+            
+            <ul class="feature-list">
+                <li><strong>Multi-source ingestion</strong> (bank statements, ERP ledgers, credit cards, payment gateways).</li>
+                <li><strong>Intelligent rule-based and AI-driven matching</strong> at transaction and line-item levels.</li>
+                <li><strong>Automatic categorization, aging analysis,</strong> and discrepancy resolution workflows.</li>
+                <li><strong>Exception flagging</strong> with QGPT-generated root-cause explanations and recommended actions.</li>
+                <li><strong>Scheduled or on-demand generation</strong> of reconciled reports and journal entries.</li>
+                <li><strong>Full integration</strong> with your existing ERP and audit tools.</li>
+            </ul>
+            
+            <div class="impact-text">
+                <p><strong>Business Impact:</strong> Cut reconciliation time from days to minutes, achieve 99% match rates, and provide real-time financial visibility to leadership.</p>
+            </div>
+            
+            <div class="mt-2">
+                <a href="#contact" class="btn btn-primary">Eliminate Reconciliation Drudgery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 6: SECURITY & INTEGRATIONS
+         ======================================== -->
+    <section class="section-alt section-padding security-section" id="security">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Built for the Most Demanding Enterprises</h2>
+            </div>
+            
+            <div class="max-width-lg">
+                <p>Every QGPT and QAgent solution inherits the same enterprise-grade security foundation: SOC 2 Type II readiness, GDPR compliance, granular role-based access mirroring your organizational structure, complete audit logging, and data sovereignty guarantees. Deploy via public cloud SaaS, private cloud, or fully on-premises/air-gap configurations.</p>
+                
+                <p>Seamless integrations with 100+ enterprise systems (ERP, CRM, HRMS, email, document repositories) ensure zero disruption to your existing technology stack.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 7: WHY CHOOSE US
+         ======================================== -->
+    <section class="section-white section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Proven Transformation, Measurable Results</h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <p><strong>80% reduction</strong> in manual processing time across finance and document workflows.</p>
+                </div>
+                <div class="benefit-card">
+                    <p><strong>95%+ straight-through processing</strong> rates for invoices and documents.</p>
+                </div>
+                <div class="benefit-card">
+                    <p><strong>Full audit readiness</strong> and compliance with zero data leakage.</p>
+                </div>
+                <div class="benefit-card">
+                    <p><strong>Conversational intelligence</strong> that lets business users interact with systems in natural language.</p>
+                </div>
+                <div class="benefit-card">
+                    <p><strong>Rapid deployment</strong> – most customers go live in weeks, not months.</p>
+                </div>
+                <div class="benefit-card">
+                    <p><strong>Continuous improvement</strong> through adaptive learning and feedback loops.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FINAL CTA SECTION
+         ======================================== -->
+    <section class="final-cta section-padding" id="contact">
+        <div class="container">
+            <h2>Ready to Deploy Your AI Employees?</h2>
+            <p>Transform manual finance operations, document handling, and knowledge access into autonomous, intelligent processes. Book a 30-minute personalized demo and see exactly how QGPT and the QAgent suite will deliver ROI for your organization.</p>
+            
+            <div class="btn-group">
+                <a href="#" class="btn btn-white">Schedule Demo</a>
+                <a href="#" class="btn btn-outline-white">Download Whitepaper: "AI Employees in Finance – 2026 Benchmark Report"</a>
+                <a href="#" class="btn btn-outline-white">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>QGPT & QAgent – Enterprise AI that understands your business, respects your security, and delivers results. Powered by QB Advisory.</p>
+            
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <span>© 2026 QB Advisory</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        // Mobile Menu Toggle
+        (function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                });
+                
+                // Close menu when clicking a link
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        mobileMenuBtn.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+            }
+            
+            // Close menu on resize if moving to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        })();
+        
+        // Header shadow on scroll
+        (function() {
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.boxShadow = '';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
